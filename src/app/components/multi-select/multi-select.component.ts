@@ -1,7 +1,10 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocompleteTrigger,
+} from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, Observable, startWith, Subscription } from 'rxjs';
 import { SupplierService } from 'src/app/services/supplier.service';
@@ -12,7 +15,7 @@ import { SelectModel } from 'src/app/shared/interfaces/select-model';
   templateUrl: './multi-select.component.html',
   styleUrls: ['./multi-select.component.scss'],
 })
-export class MultiSelectComponent implements OnInit {
+export class MultiSelectComponent implements OnInit, OnDestroy {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   selectControl = new FormControl(''); //ParentForm??
 
@@ -24,9 +27,9 @@ export class MultiSelectComponent implements OnInit {
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   @ViewChild(MatAutocompleteTrigger) autoComplete!: MatAutocompleteTrigger;
 
-  constructor(private supplierService: SupplierService) {
-    
-  }
+  constructor(private supplierService: SupplierService) {}
+
+
   ngOnInit(): void {
     //If content is in a database
     this.subscription = this.supplierService.selectValues$.subscribe((x) => {
@@ -39,17 +42,16 @@ export class MultiSelectComponent implements OnInit {
     );
   }
 
-  public toggleList(){
-    this.autoComplete.openPanel();
+  ngOnDestroy(): void {
+    if(this.subscription != undefined)
+      this.subscription.unsubscribe(); 
   }
 
   public removeItem(itemValue: string): void {
     const targetItem = this.getItem(itemValue);
     const index = this.selectedItems.indexOf(targetItem);
 
-    if (index >= 0) {
-      this.selectedItems.splice(index, 1);
-    }
+    if (index >= 0) this.selectedItems.splice(index, 1);
   }
 
   public selectItem(event: MatAutocompleteSelectedEvent): void {
@@ -61,12 +63,14 @@ export class MultiSelectComponent implements OnInit {
     this.selectControl.setValue(null);
   }
 
+  public toggleList() {
+    this.autoComplete.openPanel();
+  }
+
   private filterItems(value: string): SelectModel[] {
     const target = value.toLowerCase();
 
-    return this.itemProvider.filter((x) =>
-      x.name.toLowerCase().includes(target)
-    );
+    return this.itemProvider.filter((x) => x.name.toLowerCase().includes(target));
   }
 
   private getItem(targetValue: string): SelectModel {
