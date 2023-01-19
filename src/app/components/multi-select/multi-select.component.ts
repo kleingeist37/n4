@@ -61,7 +61,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
     if (targetItem != undefined) 
       //Remove this conditional and lines, if duplicates of selections should be possible
-      //only item into selectedItems
+      //only push item into selectedItems
       if(!this.selectedItems.includes(targetItem)){
          this.selectedItems.push(targetItem);
         const index = this.itemProvider.indexOf(targetItem);
