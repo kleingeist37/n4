@@ -14,7 +14,7 @@ import { SelectModel } from 'src/app/shared/interfaces/select-model';
 })
 export class MultiSelectComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  selectControl = new FormControl(''); //Wird das später in einer ParentForm verwendet?
+  selectControl = new FormControl(''); //ParentForm??
  
 
   itemProvider : SelectModel[] = [];
