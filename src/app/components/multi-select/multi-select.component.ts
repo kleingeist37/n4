@@ -60,9 +60,14 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
 
     if (targetItem != undefined) 
-      //Remove this line if duplicates of selections should be possible
-      if(!this.selectedItems.includes(targetItem))
-        this.selectedItems.push(targetItem);
+      //Remove this conditional and lines, if duplicates of selections should be possible
+      //only item into selectedItems
+      if(!this.selectedItems.includes(targetItem)){
+         this.selectedItems.push(targetItem);
+        const index = this.itemProvider.indexOf(targetItem);
+        this.itemProvider.splice(index,1);
+      }
+
 
 
     this.resetForm();
@@ -79,7 +84,18 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   }
 
   private getItem(targetValue: string): SelectModel {
-    return this.itemProvider.filter((x) => x.value === targetValue)[0];
+    let item = this.itemProvider.filter((x) => x.value === targetValue)[0];
+    
+    //only needed if no double selection is allowed.
+    if(item === undefined){
+      item = this.selectedItems.filter((x) => x.value == targetValue)[0];
+      this.itemProvider.push(item);
+      this.itemProvider.sort((a,b) => a.value.localeCompare(b.value));
+      this.resetForm(this.input.nativeElement.value);
+    }
+
+    return item;
+     
   }
 
   private resetForm(value = '') : void {
