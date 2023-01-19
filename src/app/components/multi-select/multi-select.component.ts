@@ -1,4 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { NgIfContext } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
@@ -59,21 +60,31 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
     if (targetItem != undefined) this.selectedItems.push(targetItem);
 
-    this.input.nativeElement.value = '';
-    this.selectControl.setValue(null);
+    this.resetForm();
   }
 
-  public toggleList() {
+  public toggleList(): void {
     this.autoComplete.openPanel();
   }
 
   private filterItems(value: string): SelectModel[] {
     const target = value.toLowerCase();
-
+    
     return this.itemProvider.filter((x) => x.name.toLowerCase().includes(target));
   }
 
   private getItem(targetValue: string): SelectModel {
     return this.itemProvider.filter((x) => x.value === targetValue)[0];
+  }
+
+  private resetForm(value = '') : void {
+    this.input.nativeElement.value = value;
+    this.selectControl.setValue(null);
+  }
+
+  //Debug Function
+  public addContent(){
+    this.supplierService.addContent();
+    this.resetForm(this.input.nativeElement.value);
   }
 }

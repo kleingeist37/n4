@@ -17,10 +17,12 @@ export class SupplierService {
 
   ];
 
+  private counter = 5;
   public selectValues$ = new BehaviorSubject<SelectModel[]>(this.selectValues); 
 
+  public addContent(): void {
+    this.selectValues.push({name: `Generic Animal ${this.counter}`, value: this.counter.toString()})
+    this.counter++;    
+  }
 
-  // public emitSelection(selectedValues : string[]){
-  //   console.log("Fancy Api Call");
-  // }
 }
