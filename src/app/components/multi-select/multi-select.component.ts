@@ -58,7 +58,12 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   public selectItem(event: MatAutocompleteSelectedEvent): void {
     const targetItem = this.getItem(event.option.value);
 
-    if (targetItem != undefined) this.selectedItems.push(targetItem);
+
+    if (targetItem != undefined) 
+      //Remove this line if duplicates of selections should be possible
+      if(!this.selectedItems.includes(targetItem))
+        this.selectedItems.push(targetItem);
+
 
     this.resetForm();
   }
