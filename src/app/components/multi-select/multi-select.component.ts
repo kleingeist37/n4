@@ -21,8 +21,6 @@ export class MultiSelectComponent implements OnInit {
   filteredItems!: Observable<SelectModel[]>;
   subscription!: Subscription;
 
-  isOpen: boolean = false;
-
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   @ViewChild(MatAutocompleteTrigger) autoComplete!: MatAutocompleteTrigger;
 
@@ -42,7 +40,6 @@ export class MultiSelectComponent implements OnInit {
   }
 
   public toggleList(){
-    this.isOpen = !this.isOpen;
     this.autoComplete.openPanel();
   }
 
