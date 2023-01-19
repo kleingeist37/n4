@@ -1,7 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, Observable, startWith, Subscription } from 'rxjs';
 import { SupplierService } from 'src/app/services/supplier.service';
@@ -18,22 +18,32 @@ export class MultiSelectComponent implements OnInit {
 
   itemProvider: SelectModel[] = [];
   selectedItems: SelectModel[] = [];
-  filteredItems: Observable<SelectModel[]>;
+  filteredItems!: Observable<SelectModel[]>;
   subscription!: Subscription;
 
+  isOpen: boolean = false;
+
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
+  @ViewChild(MatAutocompleteTrigger) autoComplete!: MatAutocompleteTrigger;
 
   constructor(private supplierService: SupplierService) {
-    this.filteredItems = this.selectControl.valueChanges.pipe(
-      startWith(''),
-      map((item) => this.filterItems(item || ''))
-    );
+    
   }
   ngOnInit(): void {
     //If content is in a database
     this.subscription = this.supplierService.selectValues$.subscribe((x) => {
       this.itemProvider = x;
     });
+
+    this.filteredItems = this.selectControl.valueChanges.pipe(
+      startWith(''),
+      map((item) => this.filterItems(item || ''))
+    );
+  }
+
+  public toggleList(){
+    this.isOpen = !this.isOpen;
+    this.autoComplete.openPanel();
   }
 
   public removeItem(itemValue: string): void {

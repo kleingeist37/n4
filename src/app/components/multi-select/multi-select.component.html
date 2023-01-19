@@ -1,13 +1,13 @@
 <form>
   <!-- TODO: Chips in own Container (ListCollector?) -->
-  <!-- TODO: Weird Behaviour after one Item is selected ... CSS? -->
   <!-- TODO: Styling -->
-  <mat-form-field appearance="fill">
+  <mat-form-field class="form-item" appearance="fill" (click)="toggleList()">
     <mat-label>Favorite Animals</mat-label>
-    <mat-chip-list #chipGrid aria-label="Animal Selection" role="listbox">
+    <mat-chip-list #chipGrid aria-label="Animal Selection" class="item-list" role="listbox">
       <mat-chip
         *ngFor="let item of selectedItems"
         (removed)="removeItem(item.value)"
+        class="chip"
       >
         {{ item.name }}
         <button matChipRemove [attr.aria-label]="'remove ' + item.name">
@@ -15,17 +15,24 @@
         </button>
       </mat-chip>
     </mat-chip-list>
-    <input
+
+      <input
       placeholder="Animal ..."
       #input
       [formControl]="selectControl"
       [matChipInputFor]="chipGrid"
       [matAutocomplete]="auto"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      class="input-field"
+      autofocus 
+      (click)="toggleList()"
     />
+
+   
     <mat-autocomplete
       #auto="matAutocomplete"
       (optionSelected)="selectItem($event)"
+      panelOpen="true"
     >
       <mat-option
         *ngFor="let item of filteredItems | async"
