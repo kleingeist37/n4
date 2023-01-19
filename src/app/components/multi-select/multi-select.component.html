@@ -2,24 +2,37 @@
   <!-- TODO: Chips in own Container (ListCollector?) -->
   <!-- TODO: Weird Behaviour after one Item is selected ... CSS? -->
   <!-- TODO: Styling -->
-    <mat-form-field  appearance="fill">
-      <mat-label>Favorite Animals</mat-label>
-      <mat-chip-list #chipGrid aria-label="Animal Selection" role="listbox">
-        <mat-chip *ngFor="let item of selectedItems" (removed)="remove(item.value)">
-          {{item.name}}
-          <button matChipRemove [attr.aria-label]="'remove ' + item.name">
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </mat-chip>
-      </mat-chip-list>
-      <input placeholder="Animal ..." #input [formControl]="selectControl"
-        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        />
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let item of filteredItems | async" [value]="item.value">
-          {{item.name}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite Animals</mat-label>
+    <mat-chip-list #chipGrid aria-label="Animal Selection" role="listbox">
+      <mat-chip
+        *ngFor="let item of selectedItems"
+        (removed)="removeItem(item.value)"
+      >
+        {{ item.name }}
+        <button matChipRemove [attr.aria-label]="'remove ' + item.name">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+    </mat-chip-list>
+    <input
+      placeholder="Animal ..."
+      #input
+      [formControl]="selectControl"
+      [matChipInputFor]="chipGrid"
+      [matAutocomplete]="auto"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selectItem($event)"
+    >
+      <mat-option
+        *ngFor="let item of filteredItems | async"
+        [value]="item.value"
+      >
+        {{ item.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
