@@ -8,7 +8,7 @@ import { SelectModel } from '../shared/interfaces/select-model';
 export class SupplierService {
 
   //durch api call ersetzen
-  private selectValues = [
+  private selectValues : SelectModel[] = [
     {name : "Monkey", value: "0"},
     {name : "Dog", value: "1"},
     {name : "Cat", value: "2"},
