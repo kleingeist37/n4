@@ -7,11 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
+    CustomSelectComponent
   ],
   imports: [
     BrowserModule,
