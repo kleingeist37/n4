@@ -1,2 +1,11 @@
-
 <app-multi-select></app-multi-select>
+
+<app-custom-select
+  [input]="customOptions"
+  [asyncInput]="asyncOptions"
+  [asyncTargetProp]="'deepOptions'"
+  [multiSelect]="false"
+  [splitString]="'deepOptions.child'"
+></app-custom-select>
+
+<button (click)="showOptions()">Options</button>
