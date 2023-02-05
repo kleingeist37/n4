@@ -1,5 +1,25 @@
 <div class="container">
     
-    <input value="{{options}}">
-    {{options[0]}}
+    <input> 
+    <select>
+
+        <option *ngFor="let option of options" value="option">
+            <input type="checkbox" id="{{option}}">
+            {{option[targetProperty]}}
+        </option>  
+    </select>     
+    <ul class="option-list">
+             
+       
+        <li *ngFor="let option of options" (click)="selected(option)" >
+            <label for="option">                
+                <input 
+                *ngIf="!allowMultiSelect"
+                type="checkbox" id="{{option}}">
+                {{option[targetProperty]}}
+            </label>
+           
+           
+        </li>
+    </ul>
 </div>
