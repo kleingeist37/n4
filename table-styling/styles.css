@@ -73,11 +73,29 @@ tbody {
     width: 40%;
 }
 
-.space {
-    width: 10%;
+@media screen and (min-width:900px)  {
+    .space {
+        display: block;
+        width: 10%;
+    } 
+
+    .content {
+        width: 80%;
+    }
 }
 
-.content {
-    width: 80%;
+@media screen and (max-width:900px) {
+    .space {
+        display: none;
+    }
+    .content {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
 }
+
+
+
+
 
