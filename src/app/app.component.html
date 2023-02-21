@@ -20,14 +20,14 @@
     [routerLinkActiveOptions]="{ exact: true }">
       Main 2
     </li>
-    <li *ngFor="let nmbr of debugArray" 
-        (click)="gotoSite(nmbr.value)"
-        [routerLink]="'main2'"
-        [queryParams]="nmbr.params" 
-        [routerLinkActive]="'active'" 
+    <li *ngFor="let entry of debugArray" 
+        (click)="gotoSite(entry.value)"
+        [routerLink]="this.m2Link"
+        [queryParams]="entry.params" 
+        [routerLinkActive]="this.activeClass" 
         [routerLinkActiveOptions]="{exact: true}"        
         >
-        Main with ID {{nmbr.value}}
+        Main with ID {{entry.value}}
     </li>
 </ul>
 <hr>

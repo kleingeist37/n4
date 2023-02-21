@@ -13,6 +13,9 @@ export class AppComponent implements OnInit{
 
   customOptions: any;
 
+  public m2Link = 'main2';
+  public activeClass = 'active';
+
   public debugArray: {value: string, params: {id: string}}[] = [
     {value: '1', params: {id: '1'},},
     {value: '2', params: {id: '2'},},
