@@ -10,23 +10,19 @@
 <!-- <button (click)="showOptions()">Options</button> --> 
 
 <ul>
-    <li [routerLink]="'main1'" 
-    [routerLinkActive]="'active'"
-    [routerLinkActiveOptions]="{ exact: true }">
-      Main 1
-    </li>
-    <li [routerLink]="'main2'" 
-    [routerLinkActive]="'active'"
-    [routerLinkActiveOptions]="{ exact: true }">
-      Main 2
-    </li>
     <li *ngFor="let entry of debugArray" 
-        [routerLink]="this.m2Link"
+        [routerLink]="entry.link"
         [queryParams]="entry.params" 
         [routerLinkActive]="this.activeClass" 
         [routerLinkActiveOptions]="{exact: true}"        
         >
-        Main with ID {{entry.value}}
+        <span *ngIf="entry.params">
+          Main with ID {{ entry.value}}
+        </span>
+        <span *ngIf="!entry.params">
+          {{entry.value | titlecase}}
+        </span>
+        
     </li>
 </ul>
 <hr>

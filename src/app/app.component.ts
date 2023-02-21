@@ -13,15 +13,17 @@ export class AppComponent implements OnInit{
 
   customOptions: any;
 
-  public m2Link = 'main2';
+
   public activeClass = 'active';
 
-  public debugArray: {value: string, params: {id: string}}[] = [
-    {value: '1', params: {id: '1'},},
-    {value: '2', params: {id: '2'},},
-    {value: '3', params: {id: '3'},},
-    {value: '4', params: {id: '4'},},
-    {value: '5', params: {id: '5'},},
+  public debugArray: {value: string, link: string,  params?: {id: string}}[] = [
+    {value: 'main1', link: 'main1',},
+    {value: 'main2', link: 'main2',},
+    {value: '1', link: 'main2', params: {id: '1'},},
+    {value: '2', link: 'main2', params: {id: '2'},},
+    {value: '3', link: 'main2', params: {id: '3'},},
+    {value: '4', link: 'main2', params: {id: '4'},},
+    {value: '5', link: 'main2', params: {id: '5'},},
   ]
 
   asyncOptions = this.supplierService.getAnimals();
