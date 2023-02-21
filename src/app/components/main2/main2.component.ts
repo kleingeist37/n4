@@ -21,7 +21,7 @@ export class Main2Component implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.activeRoute.queryParams.subscribe(x => {
-      this.id = x['id'] ? x['id'] : (this.id != this.fallbackValue ? this.fallbackValue : this.id);
+      this.id = x['id'] ? x['id'] : this.fallbackValue;
     });
   }
 
