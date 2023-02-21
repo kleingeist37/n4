@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Dosis;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+tbody {
+    display: table;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    word-wrap: break-word;
+    background-color: rgb(148, 148, 148);   
+}
+
+.row:first-child{
+    font-weight: bold;
+    color: white;
+    background-color: rgb(51, 38, 38);
+}
+
+.row:not(:first-child):nth-child(odd) {
+    background-color:  rgb(99, 98, 98);
+}
+
+.row:not(:first-child):hover {
+    background-color:  rgb(54, 54, 54);
+    color:white;
+}
+
+
+
+
+.button-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.button-bar > button {
+    margin: 1px;
+}
+
+.cell-1, .cell-2 {
+    padding: 2px 5px;
+}
+
+.cell-1 {
+    width: 12%;
+}
+
+.cell-2 {
+    width: 40%;
+}
+
+@media screen and (min-width:900px)  {
+    .space {
+        display: block;
+        width: 10%;
+    } 
+
+    .content {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .space {
+        display: none;
+    }
+    .content {
+        width: 100%;
+    }
+}
+
+
+
+
+
