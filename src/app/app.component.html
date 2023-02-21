@@ -1,11 +1,34 @@
-<app-multi-select></app-multi-select>
-
+<!--  <app-multi-select></app-multi-select>
 <app-custom-select
   [input]="customOptions"
   [asyncInput]="asyncOptions"
   [asyncTargetProp]="'deepOptions'"
   [multiSelect]="false"
   [splitString]="'deepOptions.child'"
-></app-custom-select>
+></app-custom-select> -->
 
-<button (click)="showOptions()">Options</button>
+<!-- <button (click)="showOptions()">Options</button> --> 
+
+<ul>
+    <li [routerLink]="'main1'" 
+    [routerLinkActive]="'active'"
+    [routerLinkActiveOptions]="{ exact: true }">
+      Main 1
+    </li>
+    <li [routerLink]="'main2'" 
+    [routerLinkActive]="'active'"
+    [routerLinkActiveOptions]="{ exact: true }">
+      Main 2
+    </li>
+    <li *ngFor="let nmbr of debugArray" 
+        (click)="gotoSite(nmbr.value)"
+        [routerLink]="'main2'"
+        [queryParams]="nmbr.params" 
+        [routerLinkActive]="'active'" 
+        [routerLinkActiveOptions]="{exact: true}"        
+        >
+        Main with ID {{nmbr.value}}
+    </li>
+</ul>
+<hr>
+<router-outlet></router-outlet>
